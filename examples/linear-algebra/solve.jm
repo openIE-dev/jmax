@@ -1,0 +1,8 @@
+# Solve a linear system Ax = b with energy receipt
+A = randn(1000, 1000)
+b = randn(1000)
+
+x = A \ b
+residual = norm(A * x - b)
+
+println("residual: ", residual)

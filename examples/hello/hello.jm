@@ -1,0 +1,5 @@
+# JMax hello world
+println("Hello, JMax")
+x = 1..10
+y = x .^ 2
+println("squares: ", y)
