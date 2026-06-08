@@ -1,0 +1,21 @@
+[book]
+title = "JMax"
+authors = ["David Charlot <david@openie.dev>"]
+description = "JMax — math-native programming language. 2,502 scientific computing functions on the flowG substrate."
+language = "en"
+multilingual = false
+src = "src"
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/openIE-dev/jmax"
+git-repository-icon = "fa-github"
+edit-url-template = "https://github.com/openIE-dev/jmax/edit/main/docs/{path}"
+site-url = "/jmax/"
+
+[output.html.search]
+enable = true
+
+[output.html.fold]
+enable = true

@@ -2,6 +2,13 @@
 
 **A math-native programming language for science, data, and visualization.**
 
+[![Release](https://github.com/openIE-dev/jmax/actions/workflows/release.yml/badge.svg)](https://github.com/openIE-dev/jmax/actions/workflows/release.yml)
+[![Quality](https://github.com/openIE-dev/jmax/actions/workflows/quality.yml/badge.svg)](https://github.com/openIE-dev/jmax/actions/workflows/quality.yml)
+[![Docs](https://github.com/openIE-dev/jmax/actions/workflows/docs.yml/badge.svg)](https://openie-dev.github.io/jmax)
+[![crates.io](https://img.shields.io/crates/v/jmax.svg)](https://crates.io/crates/jmax)
+[![License](https://img.shields.io/badge/license-BSL--1.1-blue.svg)](./LICENSE)
+
+
 JMax is what you'd build if you started from "I want MATLAB / Julia / R / Mathematica, but as a single self-contained tool with no install dance and 2,500 functions built in." It's a complete data-science surface — linear algebra, signal processing, plotting, statistics, ML primitives — projected onto [flowG](https://github.com/openIE-dev/flow-g) so the same code runs on CPU, Apple-silicon Metal, or WebGPU.
 
 This is the **public release surface**. Source is private at [`openIE-dev/jmax-core`](https://github.com/openIE-dev/jmax-core).
