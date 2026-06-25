@@ -6,14 +6,14 @@
 
 - [Install](./install.md)
 - [Hello, JMax](./hello.md)
-
-# Tutorial
-
-- [Tutorial overview](./tutorial/index.md)
+- [Tutorial](./tutorial/index.md)
 
 # Reference
 
-- [Reference overview](./reference/index.md)
+- [Overview](./reference/index.md)
+  - [Built-in functions](./reference/builtins.md)
+  - [The jmax command line](./reference/cli.md)
+  - [Library crates](./reference/libraries.md)
 
 # Cookbook
 

@@ -13,6 +13,8 @@ JMax is what you'd build if you started from "I want MATLAB / Julia / R / Mathem
 
 This is the **public release surface**. Source is private at [`openIE-dev/jmax-core`](https://github.com/openIE-dev/jmax-core).
 
+**Try it in your browser — no install:** [play.charlot-lang.dev](https://play.charlot-lang.dev) runs the JMax evaluator compiled to WebAssembly. Nothing leaves the page.
+
 ## Status
 
 > Release binaries + examples + documentation. JMax is **free to use software**, not an open-source project. See [LICENSE](./LICENSE) for Business Source License 1.1 terms — converts to Apache-2.0 four years after each binary's release date.
@@ -90,9 +92,17 @@ JMax is the **scientific-computing surface** in the openIE-dev family:
 
 ## Documentation
 
-- Getting started → <https://openie-dev.github.io/jmax>
+The documentation site and the GitHub Pages book mirror each other:
+
+| | Website | GitHub Pages |
+|---|---|---|
+| Home / language | [charlot-lang.dev](https://charlot-lang.dev) | [openie-dev.github.io/jmax](https://openie-dev.github.io/jmax) |
+| Docs & function reference | [docs.charlot-lang.dev](https://docs.charlot-lang.dev) | [/reference/builtins](https://openie-dev.github.io/jmax/reference/builtins.html) |
+| `jmax` CLI reference | [api.charlot-lang.dev](https://api.charlot-lang.dev) | [/reference/cli](https://openie-dev.github.io/jmax/reference/cli.html) |
+| Browser playground | [play.charlot-lang.dev](https://play.charlot-lang.dev) | — |
+
 - Examples → [`examples/`](./examples/)
-- Function reference → <https://openie-dev.github.io/jmax/reference>
+- Embedding API → [docs.rs/jmax](https://docs.rs/jmax)
 - Source mirror → [`openIE-dev/jmax-core`](https://github.com/openIE-dev/jmax-core)
 
 ## Releases

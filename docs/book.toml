@@ -3,7 +3,6 @@ title = "JMax"
 authors = ["David Charlot <david@openie.dev>"]
 description = "JMax — math-native programming language. 2,502 scientific computing functions on the flowG substrate."
 language = "en"
-multilingual = false
 src = "src"
 
 [output.html]
