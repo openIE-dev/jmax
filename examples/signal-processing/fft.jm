@@ -1,12 +1,4 @@
-# FFT of a noisy sinusoid
-fs = 1000          # sample rate (Hz)
-t = 0:1/fs:1       # 1 second of samples
-signal = sin(2*pi*50*t) + sin(2*pi*120*t) + 0.5*randn(length(t))
-
-# Frequency domain
-S = fft(signal)
-mag = abs(S[1:length(S)/2])
-
-# Find the two strongest peaks
-peaks = sort(mag, descending=true)[1:2]
-println("top peaks (magnitude): ", peaks)
+# Signal processing: the FFT magnitude spectrum of a simple wave.
+# Run:  jmax run examples/signal-processing/fft.jm
+let signal = [0.0, 1.0, 0.0, -1.0, 0.0, 1.0, 0.0, -1.0]
+fft(signal)              # magnitude spectrum -> peaks at bins 2 and 6

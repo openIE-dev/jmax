@@ -54,15 +54,16 @@ Platform support:
 ## Hello, JMax
 
 ```jmax
-# JMax script: solve a linear system, plot, and energy-receipt the work
-A = randn(1000, 1000)
-b = randn(1000)
-x = A \ b
-norm(A * x - b)
+# Solve a linear system, look at the spectrum, return the determinant.
+let A = [[2.0, 1.0], [1.0, 3.0]]
+let b = [5.0, 10.0]
+let x = A \ b            # -> [1, 3]
+let spectrum = eig(A)    # -> [3.618, 1.382]
+det(A)                   # -> 5
 ```
 
 ```bash
-jmax run examples/linear-algebra/solve.jm
+jmax run examples/hello/hello.jm     # -> 5.0
 ```
 
 REPL:
@@ -75,7 +76,7 @@ See [`examples/`](./examples/) for linear algebra, signal processing, plotting, 
 
 ## What makes JMax different
 
-- **2,502 scientific computing functions** — across 82 modules — that you can `import` without installing anything else. Linear algebra, FFT, optimization, statistics, ML primitives, file IO, plotting, all in the same binary.
+- **2,500+ functions across 82 modules**, all in one binary — linear algebra, FFT, optimization, statistics, ML primitives, file IO, plotting — nothing else to install. The [reference](https://openie-dev.github.io/jmax/reference/builtins.html) documents the 113 most-used as top-level built-ins.
 - **`.jm` files run anywhere** — same code on CPU, GPU, WGPU via flowG dispatch.
 - **Energy receipts** — every workload optionally records picojoule-per-operation via the substrate-energy layer.
 - **MCP server built in** — JMax exposes its computation surface as an MCP server (`jmax mcp`) so any LLM agent can route math through it.

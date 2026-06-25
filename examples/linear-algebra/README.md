@@ -1,23 +1,17 @@
 # linear-algebra
 
-Solve a 1000×1000 random linear system using JMax's built-in `\` operator.
+Solve a linear system with the built-in `\` operator, verify the result, and
+take a Cholesky factorization — pure Rust, no LAPACK to install.
 
 ```bash
-jmax run solve.jm
-jmax run solve.jm --record-energy receipt.json
+jmax run examples/linear-algebra/solve.jm
+# -> 11.0   (det of A)
 ```
 
 What this shows:
-- `randn(rows, cols)` Gaussian random matrix
-- The `\` solver (LU under the hood, picked at runtime by op-dispatch)
-- `norm()` for the L2 residual
+- The `\` solver (LU under the hood, dispatched at runtime)
+- Matrix multiply `A * x` to check the residual
+- `cholesky(A)` for a symmetric positive-definite matrix, and `det(A)`
 
-## Backend choice
-
-By default JMax picks the lowest-joule available backend. To force one:
-
-```bash
-jmax run solve.jm --backend cpu
-jmax run solve.jm --backend metal
-jmax run solve.jm --backend wgpu
-```
+The full linear-algebra surface (`eig`, `svd`, `qr`, `inv`, `rank`, `pinv`, …)
+is in the [reference](https://openie-dev.github.io/jmax/reference/builtins.html#linear-algebra).

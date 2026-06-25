@@ -1,13 +1,15 @@
 # signal-processing
 
-FFT of a noisy sinusoid with two embedded frequencies.
+The FFT magnitude spectrum of a simple periodic signal.
 
 ```bash
-jmax run fft.jm
+jmax run examples/signal-processing/fft.jm
+# -> [0, 0, 4, 0, 0, 0, 4, 0]   (energy at the signal's frequency bins)
 ```
 
 What this shows:
-- Sample rate as a variable, `t = 0:1/fs:1` range
-- Element-wise sin + addition + scalar broadcast
-- `fft()` returning complex spectrum
-- Indexing `[1:length(S)/2]` slice
+- Vectors as first-class values
+- `fft()` returning the magnitude spectrum
+
+The rest of the DSP surface (`ifft`, `spectrogram`, windows, FIR/IIR filters)
+is in the [reference](https://openie-dev.github.io/jmax/reference/builtins.html#signal-processing).

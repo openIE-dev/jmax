@@ -1,8 +1,8 @@
-# Solve a linear system Ax = b with energy receipt
-A = randn(1000, 1000)
-b = randn(1000)
-
-x = A \ b
-residual = norm(A * x - b)
-
-println("residual: ", residual)
+# Linear algebra: solve, verify, and decompose — pure Rust, no LAPACK.
+# Run:  jmax run examples/linear-algebra/solve.jm
+let A = [[4.0, 1.0], [1.0, 3.0]]
+let b = [1.0, 2.0]
+let x = A \ b            # LU solve
+let residual = A * x     # should match b = [1, 2]
+let L = cholesky(A)      # A is symmetric positive definite
+det(A)                   # -> 11

@@ -1,0 +1,6 @@
+# Plotting is a statement, not a separate library.
+# Run:  jmax run examples/plotting/plot.jm     (writes an SVG and opens it)
+fn main():
+  let xs = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]
+  let ys = [0.0, 0.84, 0.91, 0.14, -0.76, -0.96, -0.28, 0.66, 0.99]
+  plot line xs, ys, title="signal", xlabel="t", ylabel="amplitude"

@@ -1,0 +1,8 @@
+# Summary statistics and an ordinary-least-squares fit.
+# Run:  jmax run examples/statistics/stats.jm
+let x = [4.0, 8.0, 15.0, 16.0, 23.0, 42.0]
+let avg = mean(x)
+let spread = std(x)
+let xs = [1.0, 2.0, 3.0, 4.0, 5.0]
+let ys = [2.1, 3.9, 6.2, 7.8, 10.1]
+linear_regression(xs, ys)   # -> [intercept, slope, r_squared]
