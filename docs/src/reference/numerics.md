@@ -185,6 +185,8 @@ jmax ode "cos(t)" 0 --tf 7 --plot trajectory.svg             # the solution y(t)
 jmax ode "cos(t)" 0 --t0 1 --tf 7 --events "y" --plot ev.svg # trajectory + event markers
 jmax fit "a*exp(b*x)" data.dat --p0 1,1 --plot fit.svg       # data points + fitted curve
 jmax spectrogram signal.dat --plot spec.svg                  # time x frequency heatmap
+jmax df data.csv --plot dist.svg                             # facet of column histograms
+jmax df data.csv --groupby region --value sales --plot bar.svg   # grouped bar chart
 ```
 
 The simulation commands likewise render their fields (`jmax heat --out heat.svg`,
