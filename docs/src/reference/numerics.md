@@ -191,3 +191,16 @@ jmax df data.csv --groupby region --value sales --plot bar.svg   # grouped bar c
 
 The simulation commands likewise render their fields (`jmax heat --out heat.svg`,
 and so on); see the [Simulation](./simulation.md) reference.
+
+### Interactive output
+
+`jmax plot`, `quad`, `ode`, `fit`, and `interp` also accept `--html <dir>`, which
+writes a self-contained interactive bundle (an `index.html`, the figure as
+`viz.json`, and the WebGPU viewer) instead of a static SVG. The same figure is
+rendered on a canvas you can drag to pan, scroll to zoom, shift-drag to brush,
+and double-click to reset:
+
+```bash
+jmax plot "sin(x)/x" --from -20 --to 20 --html playground
+cd playground && python3 -m http.server   # then open the page
+```
