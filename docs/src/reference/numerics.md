@@ -170,6 +170,13 @@ jmax plot "bessel_j0(x)" "bessel_j1(x)" --from 0 --to 20
 The expressions use the same scalar interpreter as the other commands, so the
 standard math and special functions are available.
 
+For optimization, `minimize --contour` draws a 2-variable objective as a contour
+with the optimizer's descent path overlaid:
+
+```bash
+jmax minimize "(1-x)^2 + 100*(y-x^2)^2" -1 1 --method lbfgs --contour rosen.svg
+```
+
 Several numerical commands also write a publication-quality SVG with `--plot`:
 
 ```bash
