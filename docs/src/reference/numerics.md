@@ -206,11 +206,14 @@ cd playground && python3 -m http.server   # then open the page
 ```
 
 `jmax df --html` writes a multi-canvas facet of interactive column histograms (or
-an interactive bar chart for a `--groupby` result), and `jmax minimize --html`
-writes the descent path in parameter space as an interactive figure (pair it with
-`--contour` for the static contour background):
+an interactive bar chart for a `--groupby` result). `jmax spectrogram --html`
+writes an interactive viridis heatmap, and `jmax minimize --contour --html` writes
+an interactive contour of the objective with the descent path overlaid (the same
+`--contour` also writes a static SVG). All support drag-pan, wheel-zoom, and
+double-click reset:
 
 ```bash
 jmax df data.csv --html dist
+jmax spectrogram signal.dat --html spec
 jmax minimize "(1-x)^2 + 100*(y-x^2)^2" -1 1 --contour rosen.svg --html descent
 ```
