@@ -148,7 +148,19 @@ complex cases).
 
 ## Plots
 
-Several numerical commands write a publication-quality SVG with `--plot`:
+`jmax plot` graphs one or more single-variable expressions over a domain,
+overlaying them in one figure:
+
+```bash
+jmax plot "sin(x)/x" --from -20 --to 20 --out sinc.svg
+jmax plot "sin(x)" "cos(x)" "sin(x)*exp(-x/6)" --from 0 --to 12
+jmax plot "bessel_j0(x)" "bessel_j1(x)" --from 0 --to 20
+```
+
+The expressions use the same scalar interpreter as the other commands, so the
+standard math and special functions are available.
+
+Several numerical commands also write a publication-quality SVG with `--plot`:
 
 ```bash
 jmax quad "exp(-x^2)" --from -3 --to 3 --plot integral.svg   # integrand, area shaded
