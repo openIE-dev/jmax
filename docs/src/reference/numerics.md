@@ -145,3 +145,18 @@ The first-order solver handles separable and linear equations; `--linear2`
 solves the homogeneous constant-coefficient second-order equation
 `a y'' + b y' + c y = 0` through its characteristic roots (real, repeated, and
 complex cases).
+
+## Plots
+
+Several numerical commands write a publication-quality SVG with `--plot`:
+
+```bash
+jmax quad "exp(-x^2)" --from -3 --to 3 --plot integral.svg   # integrand, area shaded
+jmax ode "cos(t)" 0 --tf 7 --plot trajectory.svg             # the solution y(t)
+jmax ode "cos(t)" 0 --t0 1 --tf 7 --events "y" --plot ev.svg # trajectory + event markers
+jmax fit "a*exp(b*x)" data.dat --p0 1,1 --plot fit.svg       # data points + fitted curve
+jmax spectrogram signal.dat --plot spec.svg                  # time x frequency heatmap
+```
+
+The simulation commands likewise render their fields (`jmax heat --out heat.svg`,
+and so on); see the [Simulation](./simulation.md) reference.
