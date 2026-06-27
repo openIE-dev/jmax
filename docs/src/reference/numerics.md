@@ -61,6 +61,16 @@ The query `xq` may be a scalar or a vector. The Rust library also offers clamped
 splines, monotone PCHIP, 2D bilinear, and radial-basis-function scattered
 interpolation.
 
+The `jmax interp` command interpolates `(x, y)` samples from a data file and
+plots the sample markers with the interpolant curve overlaid:
+
+```bash
+jmax interp data.dat --method spline --at 2.5 --plot interp.svg
+jmax interp data.dat --method pchip --plot pchip.svg   # monotone, no overshoot
+```
+
+Methods: `spline` (natural cubic, the default), `linear`, `pchip`, `nearest`.
+
 ## Matrix decompositions
 
 On top of the core `det`, `inv`, `solve`, `eig`, `svd`, `rank`, and `pinv`:
