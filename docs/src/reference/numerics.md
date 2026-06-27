@@ -204,3 +204,13 @@ and double-click to reset:
 jmax plot "sin(x)/x" --from -20 --to 20 --html playground
 cd playground && python3 -m http.server   # then open the page
 ```
+
+`jmax df --html` writes a multi-canvas facet of interactive column histograms (or
+an interactive bar chart for a `--groupby` result), and `jmax minimize --html`
+writes the descent path in parameter space as an interactive figure (pair it with
+`--contour` for the static contour background):
+
+```bash
+jmax df data.csv --html dist
+jmax minimize "(1-x)^2 + 100*(y-x^2)^2" -1 1 --contour rosen.svg --html descent
+```
