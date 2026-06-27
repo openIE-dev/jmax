@@ -106,3 +106,42 @@ plus implicit BDF for stiff systems), and unconstrained optimization
 (`jmax-optim`: Nelder-Mead, L-BFGS, box-constrained L-BFGS) take a function as
 input. They are available through the Rust API today and are being surfaced as
 dedicated `jmax` subcommands.
+
+The numerical definite integral has its own command:
+
+```bash
+jmax quad "exp(-x^2)" --from -5 --to 5    # 1.7724538509  (sqrt(pi))
+jmax quad "x^7" --from 0 --to 1 --method gl --points 4   # 0.125, exact
+```
+
+## Symbolic algebra
+
+JMax carries a computer algebra system. From `jmax eval`, expressions with free
+variables are simplified symbolically, and the calculus functions fold to their
+results:
+
+```bash
+jmax eval "d/dx (x^3 + sin(x))"            # 3*x^2 + cos(x)
+jmax eval "integrate(x*sin(x), x)"         # sin(x) - x*cos(x)   (by parts)
+jmax eval "integrate(1/(x^2 - 1), x)"      # partial fractions to logs
+jmax eval "expand_trig(sin(2*x))"          # 2*cos(x)*sin(x)
+jmax eval "sin(x)^2 + cos(x)^2"            # 1
+```
+
+Supported symbolic operations include differentiation, integration (power rule,
+the standard table, integration by parts, u-substitution, partial fractions),
+Taylor series, limits (continuity, L'Hopital, rational forms at infinity),
+equation solving (linear, quadratic, cubic, and linear systems), polynomial
+expand/collect, substitution, and trig rewriting.
+
+Ordinary differential equations are solved symbolically with `jmax dsolve`:
+
+```bash
+jmax dsolve "1 - y"          # y' = 1 - y   ->  y = exp(-x)*(C + exp(x))
+jmax dsolve --linear2 "1,0,1"  # y'' + y = 0  ->  y = C1*cos(x) + C2*sin(x)
+```
+
+The first-order solver handles separable and linear equations; `--linear2`
+solves the homogeneous constant-coefficient second-order equation
+`a y'' + b y' + c y = 0` through its characteristic roots (real, repeated, and
+complex cases).
