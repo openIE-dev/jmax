@@ -13,6 +13,7 @@
 - [Overview](./reference/index.md)
   - [Built-in functions](./reference/builtins.md)
   - [The jmax command line](./reference/cli.md)
+  - [Simulation](./reference/simulation.md)
   - [Library crates](./reference/libraries.md)
 
 # Cookbook
