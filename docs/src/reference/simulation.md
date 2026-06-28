@@ -54,6 +54,17 @@ jmax topopt --nx 80 --ny 40 --volfrac 0.4 --iters 60 --out topology.svg
 | `jmax stokes3d` | 3D incompressible Stokes flow in a box | isometric speed field |
 | `jmax unsteady` | time-dependent Navier-Stokes (lid-driven cavity) | flow + energy history |
 | `jmax advect` | scalar advection-diffusion, SUPG vs Galerkin | scalar field |
+| `jmax lbm` | Lattice-Boltzmann (D2Q9 BGK): lid-driven cavity or Poiseuille channel | speed-field heatmap |
+
+`jmax lbm` is a kinetic-theory CFD solver (the lattice-Boltzmann method, the
+approach behind real-time GPU flow tools) that complements the FEM Navier-Stokes
+above. It runs a lid-driven cavity or a force-driven channel to steady state and
+writes the speed field as a heatmap, static (`--plot`) or interactive (`--html`):
+
+```bash
+jmax lbm --case cavity --nx 64 --ny 64 --re 100 --plot cavity.svg
+jmax lbm --case channel --html flow   # force-driven Poiseuille, interactive
+```
 
 The fluid solvers use a mixed velocity-pressure formulation with
 Brezzi-Pitkaranta pressure stabilization, solved by GMRES with a block
