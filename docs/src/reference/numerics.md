@@ -144,6 +144,18 @@ Taylor series, limits (continuity, L'Hopital, rational forms at infinity),
 equation solving (linear, quadratic, cubic, and linear systems), polynomial
 expand/collect, substitution, and trig rewriting.
 
+Systems of polynomial equations are solved with `jmax solve-system`, which builds
+a Gröbner basis and back-substitutes for the real solutions (Mathematica-class
+solving of nonlinear systems):
+
+```bash
+jmax solve-system "x^2 + y^2 - 1; x - y" --vars x,y   # circle meets line: (±0.707, ±0.707)
+jmax solve-system "x^2 - y; y - 4" --vars x,y         # (±2, 4)
+```
+
+Each `;`-separated expression is read as `= 0`. The solver handles
+zero-dimensional systems and reports inconsistent or positive-dimensional ones.
+
 Ordinary differential equations are solved symbolically with `jmax dsolve`:
 
 ```bash
