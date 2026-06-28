@@ -124,6 +124,14 @@ jmax quad "exp(-x^2)" --from -5 --to 5    # 1.7724538509  (sqrt(pi))
 jmax quad "x^7" --from 0 --to 1 --method gl --points 4   # 0.125, exact
 ```
 
+Stochastic differential equations integrate over many sample paths with
+`jmax sde` (Euler-Maruyama or Milstein):
+
+```bash
+# geometric Brownian motion; mean of X(T) approaches X0 * e^(mu*T)
+jmax sde "0.05*y" "0.2*y" --y0 1 --t1 1 --paths 4000 --plot path.svg
+```
+
 ## Symbolic algebra
 
 JMax carries a computer algebra system. From `jmax eval`, expressions with free
