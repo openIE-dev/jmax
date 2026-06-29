@@ -132,6 +132,27 @@ Stochastic differential equations integrate over many sample paths with
 jmax sde "0.05*y" "0.2*y" --y0 1 --t1 1 --paths 4000 --plot path.svg
 ```
 
+Ordinary differential equations are solved with `jmax ode`; `--method rosenbrock`
+selects an L-stable stiff solver, and `--events "<g>"` reports zero-crossings:
+
+```bash
+jmax ode "-1000*(y - cos(t)) - sin(t)" 1 --tf 1 --method rosenbrock   # stiff -> cos(t)
+```
+
+## Machine learning for operators
+
+`jmax fno` demonstrates a Fourier Neural Operator learning a solution *operator*
+from example fields (differentiation, integration, or smoothing) rather than a
+fixed input/output pair:
+
+```bash
+jmax fno --operator deriv --plot fno.svg     # learns differentiation to ~1e-15
+jmax fno --operator smooth                   # learns a Gaussian-smoothing operator
+```
+
+The spectral convolution (FFT, per-mode complex weights, inverse FFT) and the
+operator fit are pure Rust; this is the building block for PDE surrogate models.
+
 ## Symbolic algebra
 
 JMax carries a computer algebra system. From `jmax eval`, expressions with free
