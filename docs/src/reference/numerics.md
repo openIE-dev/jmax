@@ -98,6 +98,15 @@ jmax eigs laplacian.txt --k 2 --triplets       # sparse input: "row col value" p
 largest magnitude); `--triplets` reads coordinate form for a genuinely sparse
 matrix; `--maxiter` raises the Krylov budget for tightly clustered spectra.
 
+To reach eigenvalues buried in the *interior* of the spectrum — near a
+resonance, a design frequency, a bandgap — pass `--sigma`, which runs
+shift-invert Lanczos on `(A − σI)⁻¹` and returns the eigenvalues nearest σ
+(SciPy `eigsh(sigma=…)` / ARPACK shift-invert):
+
+```bash
+jmax eigs matrix.dat --k 3 --sigma 2.0    # the 3 eigenvalues closest to 2.0
+```
+
 ## Regression and statistics
 
 | Builtin | Result |
@@ -130,6 +139,19 @@ plus implicit BDF for stiff systems), and unconstrained optimization
 (`jmax-optim`: Nelder-Mead, L-BFGS, box-constrained L-BFGS) take a function as
 input. They are available through the Rust API today and are being surfaced as
 dedicated `jmax` subcommands.
+
+`jmax minimize` also takes `--constraints`: a `;`-separated list of relations
+(`<=`, `>=`, `=`) in the objective's variables, solved by the augmented
+Lagrangian method (SciPy `minimize(constraints=…)` / MATLAB `fmincon`):
+
+```bash
+jmax minimize "x^2 + y^2" 0 0 --constraints "x + y = 1"            # -> (0.5, 0.5)
+jmax minimize "(x-2)^2 + (y-1)^2" 0 0 --constraints "x^2 + y^2 <= 1"  # project onto the disk
+jmax minimize "x^2+y^2+z^2" 0 0 0 --constraints "x+y+z = 1; x >= 0.6"  # equality + inequality
+```
+
+Equalities become `g = 0` and inequalities `g ≤ 0`; the report gives the
+solution, the objective, and the worst constraint violation.
 
 The numerical definite integral has its own command:
 
