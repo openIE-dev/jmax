@@ -71,6 +71,18 @@ jmax interp data.dat --method pchip --plot pchip.svg   # monotone, no overshoot
 
 Methods: `spline` (natural cubic, the default), `linear`, `pchip`, `nearest`.
 
+For a *known* function (not scattered samples), `jmax cheb` uses Chebyshev
+spectral methods: interpolation on Chebyshev–Gauss–Lobatto nodes converges
+*spectrally* (faster than any power of 1/n, with no Runge phenomenon), and the
+same representation differentiates and integrates to the same accuracy
+(chebfun-style):
+
+```bash
+jmax cheb approx "exp(x)" -n 20                     # max error ~1e-15 with 20 nodes
+jmax cheb diff "sin(x)" --at 1 --exact 0.5403       # spectral derivative
+jmax cheb integrate "4/(1+x^2)" --from 0 --to 1 --exact 3.14159265   # Clenshaw–Curtis
+```
+
 ## Matrix decompositions
 
 On top of the core `det`, `inv`, `solve`, `eig`, `svd`, `rank`, and `pinv`:
@@ -107,6 +119,17 @@ shift-invert Lanczos on `(A − σI)⁻¹` and returns the eigenvalues nearest �
 jmax eigs matrix.dat --k 3 --sigma 2.0    # the 3 eigenvalues closest to 2.0
 ```
 
+The iterative solvers approximate; for an *exact* solve of a large sparse
+system, `jmax lusolve` factors it directly — sparse LU (Gilbert–Peierls, with
+partial pivoting) for a general matrix, or LDLᵀ / sparse Cholesky with `--spd`
+for a symmetric positive-definite one:
+
+```bash
+jmax lusolve A.dat b.vec              # sparse LU:  A x = b
+jmax lusolve K.dat f.vec --spd       # sparse Cholesky (SPD), e.g. an FEM stiffness solve
+jmax lusolve big.txt b.vec --triplets   # coordinate-format sparse input
+```
+
 ## Regression and statistics
 
 | Builtin | Result |
@@ -118,6 +141,27 @@ jmax eigs matrix.dat --k 3 --sigma 2.0    # the 3 eigenvalues closest to 2.0
 The `jmax-stat` library also returns the full regression summary (R squared,
 standard errors, t statistics, p values), one-way ANOVA tables, the percentile
 bootstrap, and Gaussian kernel density estimation.
+
+### Time series
+
+`jmax forecast` fits a classical time-series model to a series and projects it
+forward — AR(p) (Yule–Walker), ARIMA(p, d, q), or additive Holt–Winters triple
+exponential smoothing:
+
+```bash
+jmax forecast series.dat --model arima --p 2 --d 1 --q 0 --steps 12
+jmax forecast sales.dat --model hw --season 12 --steps 24   # trend + seasonality
+```
+
+### State estimation
+
+`jmax kalman` runs a Kalman filter (and, with `--smooth`, the RTS smoother) over
+noisy 1-D position measurements using a constant-velocity model — recovering
+position *and* velocity and de-noising the track:
+
+```bash
+jmax kalman track.dat --meas-noise 0.4 --proc-noise 1e-3 --smooth --plot k.svg
+```
 
 ## Signal processing
 
