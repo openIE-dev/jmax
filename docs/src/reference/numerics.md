@@ -165,8 +165,19 @@ jmax bvp "6*x" --a 0 --b 1 --ya 0 --yb 1 --plot cubic.svg          # y''=6x -> x
 jmax bvp "-sin(y) - 0.1*yp" --a 0 --b 4 --ya 1 --yb -0.3 --slope -0.5  # nonlinear
 ```
 
-Linear problems are hit in a single Newton step; mild nonlinearities converge in
-a handful. This is MATLAB `bvp4c` / SciPy `solve_bvp`.
+The default method is single shooting (integrate from one end, Newton-solve for
+the initial slope). For stiff or strongly nonlinear problems, where forward
+integration amplifies the slope error, `--method collocation` instead
+discretizes the whole trajectory and solves it at once by 4th-order
+Hermite-Simpson collocation — the method behind MATLAB `bvp4c` / SciPy
+`solve_bvp`:
+
+```bash
+jmax bvp "6*x" --a 0 --b 1 --ya 0 --yb 1 --method collocation --nodes 40
+```
+
+Shooting hits linear problems in one Newton step; collocation returns the whole
+mesh solution and stays accurate where shooting struggles.
 
 ## Machine learning for operators
 
