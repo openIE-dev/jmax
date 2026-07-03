@@ -131,6 +131,17 @@ The library adds full convolution and correlation, windowed-sinc FIR design (low
 high, band), Butterworth biquads with zero-phase `filtfilt`, and the STFT
 spectrogram.
 
+Where the FFT trades all time information for frequency, the **wavelet**
+transform keeps both, localizing a transient in time *and* scale. `jmax wavelet`
+runs the orthonormal fast wavelet transform (Haar, `db2`, `db4`) — either a
+multiresolution decomposition (energy per scale) or wavelet denoising
+(soft-threshold, VisuShrink), the tools of SciPy `pywt`:
+
+```bash
+jmax wavelet signal.dat --wavelet db4 --level 4              # energy per scale
+jmax wavelet signal.dat --wavelet db4 --denoise --plot d.svg  # denoise + overlay
+```
+
 ## Calculus, ODEs, and optimization
 
 Adaptive quadrature (`jmax-quad`: Gauss-Kronrod, Gauss-Legendre, Gauss-Hermite),
