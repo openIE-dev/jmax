@@ -153,6 +153,18 @@ jmax minimize "x^2+y^2+z^2" 0 0 0 --constraints "x+y+z = 1; x >= 0.6"  # equalit
 Equalities become `g = 0` and inequalities `g ≤ 0`; the report gives the
 solution, the objective, and the worst constraint violation.
 
+The other minimizers are local — they descend to the nearest basin. For a
+multimodal objective, `--global` searches a whole box by Differential Evolution
+(SciPy `differential_evolution`), then polishes the winner with box-constrained
+L-BFGS. It is deterministic given its seed, and needs `--bounds` (one `lo,hi`
+per variable, alphabetical):
+
+```bash
+# Rastrigin: a lattice of local minima; DE finds the global one at the origin.
+jmax minimize "20 + (x^2-10*cos(6.2831853*x)) + (y^2-10*cos(6.2831853*y))" \
+    --global --bounds "-5.12,5.12; -5.12,5.12"
+```
+
 The numerical definite integral has its own command:
 
 ```bash
