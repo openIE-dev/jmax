@@ -215,6 +215,21 @@ The system must be square (one equation per variable); a singular Jacobian is
 handled by a Levenberg-Marquardt fallback, and `--start` selects which root a
 multi-root system converges to.
 
+When there are *more* residuals than unknowns — an overdetermined system, the
+usual case in fitting and calibration — `jmax lsq` minimizes the sum of squares
+`½Σrᵢ²` by Levenberg-Marquardt instead of demanding an exact root (SciPy
+`least_squares` / MATLAB `lsqnonlin`):
+
+```bash
+# Least-squares line through 4 non-collinear points -> a=1.1, b=1.1
+jmax lsq "a+b*0-1; a+b*1-3; a+b*2-2; a+b*3-5" --vars a,b
+# Three circles that nearly meet: the best-fit intersection point
+jmax lsq "sqrt(x^2+y^2)-1.4142; sqrt((x-2)^2+y^2)-1.4142; sqrt(x^2+(y-2)^2)-1.4142" --vars x,y --start 0,0
+```
+
+Each `;`-separated expression is a residual driven toward zero; the report gives
+the fitted values, the residual norm `‖r‖`, and the cost `½‖r‖²`.
+
 Ordinary differential equations are solved symbolically with `jmax dsolve`:
 
 ```bash
