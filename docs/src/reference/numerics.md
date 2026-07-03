@@ -139,6 +139,21 @@ selects an L-stable stiff solver, and `--events "<g>"` reports zero-crossings:
 jmax ode "-1000*(y - cos(t)) - sin(t)" 1 --tf 1 --method rosenbrock   # stiff -> cos(t)
 ```
 
+Where `jmax ode` marches an initial value forward, `jmax bvp` solves a
+*boundary* value problem — `y'' = f(x, y, yp)` on `[a, b]` with the solution
+pinned at both ends, `y(a)` and `y(b)`. It shoots: the unknown initial slope is
+found by driving the far-boundary residual to zero (adaptive RK45 inside a
+Newton solve). The right-hand side is written in `x`, `y`, and `yp` (for `y'`):
+
+```bash
+jmax bvp "-y" --a 0 --b 1.5708 --ya 0 --yb 1                       # y''=-y -> sin(x)
+jmax bvp "6*x" --a 0 --b 1 --ya 0 --yb 1 --plot cubic.svg          # y''=6x -> x^3
+jmax bvp "-sin(y) - 0.1*yp" --a 0 --b 4 --ya 1 --yb -0.3 --slope -0.5  # nonlinear
+```
+
+Linear problems are hit in a single Newton step; mild nonlinearities converge in
+a handful. This is MATLAB `bvp4c` / SciPy `solve_bvp`.
+
 ## Machine learning for operators
 
 `jmax fno` demonstrates a Fourier Neural Operator learning a solution *operator*
@@ -184,6 +199,21 @@ jmax solve-system "x^2 - y; y - 4" --vars x,y         # (±2, 4)
 
 Each `;`-separated expression is read as `= 0`. The solver handles
 zero-dimensional systems and reports inconsistent or positive-dimensional ones.
+
+For systems that are *not* polynomial — anything with `sin`, `exp`, `log`, or
+ratios — `jmax fsolve` finds a root numerically by damped Newton iteration from
+a starting guess, converging to the solution nearest the start. This is the
+floating-point counterpart to `solve-system` (SciPy `fsolve` / MATLAB `fsolve`):
+
+```bash
+jmax fsolve "x*cos(y) - 1; x*sin(y) - 1" --vars x,y                 # -> (√2, π/4)
+jmax fsolve "x^2 + y^2 - 1; y - x" --vars x,y --start -2,-0.5       # the negative root
+jmax fsolve "x+y+z-6; x^2+y^2+z^2-14; x*y*z-6" --vars x,y,z --start 0.5,1.5,3.5  # (1,2,3)
+```
+
+The system must be square (one equation per variable); a singular Jacobian is
+handled by a Levenberg-Marquardt fallback, and `--start` selects which root a
+multi-root system converges to.
 
 Ordinary differential equations are solved symbolically with `jmax dsolve`:
 
