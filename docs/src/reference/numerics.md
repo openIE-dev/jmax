@@ -84,6 +84,20 @@ On top of the core `det`, `inv`, `solve`, `eig`, `svd`, `rank`, and `pinv`:
 The library exposes the full factorizations (`qr` returning both `Q` and `R`,
 explicit `(L, U, P)`, a one-sided Jacobi SVD, `eigvalsh`, least squares).
 
+`jmax eig` diagonalizes a matrix densely. For a matrix too large to factor —
+where you want only a few eigenvalues at one end of the spectrum — `jmax eigs`
+uses Lanczos, which needs only matrix-vector products (SciPy `eigsh` / ARPACK):
+
+```bash
+jmax eigs matrix.dat --k 5 --which LA          # 5 largest (algebraic) eigenvalues
+jmax eigs matrix.dat --k 3 --which SA          # 3 smallest
+jmax eigs laplacian.txt --k 2 --triplets       # sparse input: "row col value" per line
+```
+
+`--which` selects the end of the spectrum (`LA` largest, `SA` smallest, `LM`
+largest magnitude); `--triplets` reads coordinate form for a genuinely sparse
+matrix; `--maxiter` raises the Krylov budget for tightly clustered spectra.
+
 ## Regression and statistics
 
 | Builtin | Result |
