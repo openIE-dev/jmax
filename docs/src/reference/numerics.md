@@ -179,6 +179,21 @@ jmax bvp "6*x" --a 0 --b 1 --ya 0 --yb 1 --method collocation --nodes 40
 Shooting hits linear problems in one Newton step; collocation returns the whole
 mesh solution and stays accurate where shooting struggles.
 
+`--method adaptive` goes further: it starts from a coarse mesh, estimates the
+error on each interval, and refines where the solution is hardest to resolve —
+automatically capturing boundary layers and sharp features a uniform mesh would
+miss, and falling back to homotopy continuation when the nonlinear solve stalls:
+
+```bash
+jmax bvp "80*sinh(y)" --a 0 --b 1 --ya 0 --yb 1 --method adaptive --nodes 8
+# converges by refining ~8 -> ~90 nodes to resolve the boundary layer near x=1
+```
+
+It reports the initial and final node counts and the largest remaining interval
+error. Mesh refinement is robust from a plain guess; the continuation fallback
+widens the basin for hard nonlinear solves but a pathological guess on a
+multi-solution problem can still need a better start.
+
 ## Machine learning for operators
 
 `jmax fno` demonstrates a Fourier Neural Operator learning a solution *operator*
