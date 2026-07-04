@@ -81,7 +81,13 @@ same representation differentiates and integrates to the same accuracy
 jmax cheb approx "exp(x)" -n 20                     # max error ~1e-15 with 20 nodes
 jmax cheb diff "sin(x)" --at 1 --exact 0.5403       # spectral derivative
 jmax cheb integrate "4/(1+x^2)" --from 0 --to 1 --exact 3.14159265   # Clenshaw–Curtis
+jmax cheb roots "sin(3.14159*x)" --from -2.5 --to 2.5   # every zero in the interval
 ```
+
+`cheb roots` finds *all* the real zeros of a smooth function at once — no
+bracketing or starting guesses — as the real eigenvalues of the function's
+Chebyshev *colleague matrix* (the chebfun approach), which is what makes it
+robust for closely spaced or many roots.
 
 ## Matrix decompositions
 
@@ -95,6 +101,15 @@ On top of the core `det`, `inv`, `solve`, `eig`, `svd`, `rank`, and `pinv`:
 
 The library exposes the full factorizations (`qr` returning both `Q` and `R`,
 explicit `(L, U, P)`, a one-sided Jacobi SVD, `eigvalsh`, least squares).
+
+`jmax eig` handles the *symmetric* eigenproblem. For a **general** (nonsymmetric)
+matrix — whose eigenvalues can be complex — `jmax eigvals` computes the whole
+spectrum by Hessenberg reduction + Francis double-shift QR (the LAPACK `dgeev`
+approach), reporting each eigenvalue as `re ± im·i`:
+
+```bash
+jmax eigvals A.dat        # every eigenvalue of a general square matrix
+```
 
 `jmax eig` diagonalizes a matrix densely. For a matrix too large to factor —
 where you want only a few eigenvalues at one end of the spectrum — `jmax eigs`
