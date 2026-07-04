@@ -111,6 +111,16 @@ approach), reporting each eigenvalue as `re ± im·i`:
 jmax eigvals A.dat        # every eigenvalue of a general square matrix
 ```
 
+`jmax expm` computes the matrix *exponential* `e^{A·t}` — the state-transition
+matrix of the linear system `ẋ = A x` (so `x(t) = e^{A t} x(0)`), and the tool
+behind continuous-time control and Markov chains. It is not the entrywise
+exponential; it uses scaling-and-squaring with a Padé approximant (MATLAB /
+SciPy `expm`):
+
+```bash
+jmax expm A.dat --t 0.5    # e^(A·0.5)
+```
+
 `jmax eig` diagonalizes a matrix densely. For a matrix too large to factor —
 where you want only a few eigenvalues at one end of the spectrum — `jmax eigs`
 uses Lanczos, which needs only matrix-vector products (SciPy `eigsh` / ARPACK):
