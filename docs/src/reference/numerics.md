@@ -121,6 +121,15 @@ SciPy `expm`):
 jmax expm A.dat --t 0.5    # e^(A·0.5)
 ```
 
+Its companions `jmax sqrtm` and `jmax logm` compute the principal matrix square
+root (`X·X = A`, Denman–Beavers) and logarithm (the inverse of `expm`) — the
+matrix-function trio behind matrix means and manifold computations:
+
+```bash
+jmax sqrtm A.dat     # principal √A
+jmax logm  A.dat     # principal log A   (logm(expm(A)) = A)
+```
+
 `jmax eig` diagonalizes a matrix densely. For a matrix too large to factor —
 where you want only a few eigenvalues at one end of the spectrum — `jmax eigs`
 uses Lanczos, which needs only matrix-vector products (SciPy `eigsh` / ARPACK):
