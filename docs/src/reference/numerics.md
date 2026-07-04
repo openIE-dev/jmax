@@ -261,6 +261,14 @@ jmax quad "exp(-x^2)" --from -5 --to 5    # 1.7724538509  (sqrt(pi))
 jmax quad "x^7" --from 0 --to 1 --method gl --points 4   # 0.125, exact
 ```
 
+Multidimensional integrals over a rectangle or box use `jmax quad2` and
+`jmax quad3` (tensored adaptive Gauss-Kronrod; SciPy `dblquad`/`tplquad`):
+
+```bash
+jmax quad2 "exp(-(x^2+y^2))" --xfrom -3 --xto 3 --yfrom -3 --yto 3   # ≈ π
+jmax quad3 "x*y*z"           # ∫∫∫ over the unit cube = 1/8
+```
+
 Stochastic differential equations integrate over many sample paths with
 `jmax sde` (Euler-Maruyama or Milstein):
 
