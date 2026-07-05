@@ -111,6 +111,15 @@ approach), reporting each eigenvalue as `re ± im·i`:
 jmax eigvals A.dat        # every eigenvalue of a general square matrix
 ```
 
+Add `--vectors` to also compute the (complex) eigenVECTORS by inverse iteration.
+And `jmax rrqr` gives a rank-revealing column-pivoted QR — its `R` diagonal
+exposes the numerical rank (trailing near-zeros = rank deficiency):
+
+```bash
+jmax eigvals A.dat --vectors    # eigenpairs (λ, v)
+jmax rrqr A.dat                 # numerical rank + R diagonal + column permutation
+```
+
 `jmax geneig` solves the symmetric-definite *generalized* eigenproblem
 `K x = λ M x` — the natural-frequency / mode-shape problem of structural and
 vibration analysis (MATLAB `eig(K,M)` / SciPy `eigh(K,M)`), with `K` symmetric
@@ -361,6 +370,14 @@ miss, and falling back to homotopy continuation when the nonlinear solve stalls:
 ```bash
 jmax bvp "80*sinh(y)" --a 0 --b 1 --ya 0 --yb 1 --method adaptive --nodes 8
 # converges by refining ~8 -> ~90 nodes to resolve the boundary layer near x=1
+```
+
+For a *linear* variable-coefficient problem `u'' + p(x)u' + q(x)u = f(x)`,
+`--method spectral` uses Chebyshev collocation — exponentially accurate for
+smooth coefficients (the main expr is `f(x)`; `--p`/`--q` are the coefficients):
+
+```bash
+jmax bvp "0" --a 0 --b 1.5708 --ya 0 --yb 1 --method spectral --q "1"   # u''+u=0 -> sin(x)
 ```
 
 It reports the initial and final node counts and the largest remaining interval
