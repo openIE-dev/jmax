@@ -111,6 +111,15 @@ approach), reporting each eigenvalue as `re ± im·i`:
 jmax eigvals A.dat        # every eigenvalue of a general square matrix
 ```
 
+`jmax geneig` solves the symmetric-definite *generalized* eigenproblem
+`K x = λ M x` — the natural-frequency / mode-shape problem of structural and
+vibration analysis (MATLAB `eig(K,M)` / SciPy `eigh(K,M)`), with `K` symmetric
+and `M` symmetric positive-definite:
+
+```bash
+jmax geneig K.dat M.dat    # generalized eigenvalues of K x = λ M x
+```
+
 `jmax expm` computes the matrix *exponential* `e^{A·t}` — the state-transition
 matrix of the linear system `ẋ = A x` (so `x(t) = e^{A t} x(0)`), and the tool
 behind continuous-time control and Markov chains. It is not the entrywise
@@ -162,6 +171,19 @@ for a symmetric positive-definite one:
 jmax lusolve A.dat b.vec              # sparse LU:  A x = b
 jmax lusolve K.dat f.vec --spd       # sparse Cholesky (SPD), e.g. an FEM stiffness solve
 jmax lusolve big.txt b.vec --triplets   # coordinate-format sparse input
+```
+
+### Tensors and einsum
+
+Beyond matrices, JMax has N-dimensional tensors with NumPy broadcasting,
+reshaping, axis reductions, and a general `einsum`. On the CLI, `jmax einsum`
+runs Einstein summation over matrix operands — matrix multiply, trace,
+transpose, and contraction all in one index notation:
+
+```bash
+jmax einsum "ij,jk->ik" A.dat B.dat   # matrix multiply
+jmax einsum "ii->" A.dat              # trace
+jmax einsum "ij->ji" A.dat            # transpose
 ```
 
 ## Regression and statistics
