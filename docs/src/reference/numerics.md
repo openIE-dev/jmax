@@ -194,8 +194,10 @@ energy, the Frobenius error `‖A − Aₖ‖`, and the storage ratio:
 jmax lowrank data.dat --rank 5 --report    # rank-5 approximation + compression stats
 ```
 
-The library also carries the N-dimensional Tucker / higher-order SVD
-(`hosvd`, `tucker_reconstruct`) for compressing multi-way tensors.
+The library also carries two N-dimensional tensor factorizations: Tucker /
+higher-order SVD (`hosvd`, `tucker_reconstruct`) for orthogonal subspace
+compression, and CP / PARAFAC (`cp_als`) for a sum of interpretable rank-1
+components.
 
 ## Regression and statistics
 
