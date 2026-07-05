@@ -194,6 +194,14 @@ energy, the Frobenius error `‖A − Aₖ‖`, and the storage ratio:
 jmax lowrank data.dat --rank 5 --report    # rank-5 approximation + compression stats
 ```
 
+Where SVD gives signed orthogonal factors, `jmax nmf` gives *non-negative* ones
+— `A ≈ W H` with `W, H ≥ 0` — so the factors read as additive, interpretable
+parts (topics, spectral endmembers, source signals; scikit-learn's `NMF`):
+
+```bash
+jmax nmf counts.dat --rank 3    # 3 non-negative parts W and their coefficients H
+```
+
 The library also carries two N-dimensional tensor factorizations: Tucker /
 higher-order SVD (`hosvd`, `tucker_reconstruct`) for orthogonal subspace
 compression, and CP / PARAFAC (`cp_als`) for a sum of interpretable rank-1
