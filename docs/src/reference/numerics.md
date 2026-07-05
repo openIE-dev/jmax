@@ -186,6 +186,17 @@ jmax einsum "ii->" A.dat              # trace
 jmax einsum "ij->ji" A.dat            # transpose
 ```
 
+`jmax lowrank` compresses a matrix to its best rank-`k` approximation by
+truncated SVD (Eckart–Young); `--report` shows the singular values, the retained
+energy, the Frobenius error `‖A − Aₖ‖`, and the storage ratio:
+
+```bash
+jmax lowrank data.dat --rank 5 --report    # rank-5 approximation + compression stats
+```
+
+The library also carries the N-dimensional Tucker / higher-order SVD
+(`hosvd`, `tucker_reconstruct`) for compressing multi-way tensors.
+
 ## Regression and statistics
 
 | Builtin | Result |
