@@ -5,7 +5,6 @@
 [![Release](https://github.com/openIE-dev/jmax/actions/workflows/release.yml/badge.svg)](https://github.com/openIE-dev/jmax/actions/workflows/release.yml)
 [![Quality](https://github.com/openIE-dev/jmax/actions/workflows/quality.yml/badge.svg)](https://github.com/openIE-dev/jmax/actions/workflows/quality.yml)
 [![Docs](https://github.com/openIE-dev/jmax/actions/workflows/docs.yml/badge.svg)](https://openie-dev.github.io/jmax)
-[![crates.io](https://img.shields.io/crates/v/jmax.svg)](https://crates.io/crates/jmax)
 [![License](https://img.shields.io/badge/license-BSL--1.1-blue.svg)](./LICENSE)
 
 
@@ -25,20 +24,17 @@ This is the **public release surface**. Source is private at [`openIE-dev/jmax-c
 |---|---|
 | `jmax` | The JMax CLI: REPL, file runner, formatter, MCP server |
 
-Plus a Rust library, [`jmax`](https://crates.io/crates/jmax), for embedding.
-
 ## Install
 
+JMax ships as a **self-contained prebuilt binary** — download the archive for your platform from the [latest release](https://github.com/openIE-dev/jmax/releases/latest) (assets: `jmax-<version>-<target>.tar.gz`, with SHA-256 checksums):
+
 ```bash
-# via cargo
-cargo install jmax
-
-# via cargo-binstall (prebuilt binary)
-cargo binstall jmax
-
-# direct download
-curl -fsSL https://github.com/openIE-dev/jmax/releases/latest/download/jmax-$(uname -s)-$(uname -m).tar.gz | tar xz
+V=0.1.0; T=aarch64-apple-darwin   # Apple silicon; pick your target
+curl -fsSL "https://github.com/openIE-dev/jmax/releases/download/v$V/jmax-$V-$T.tar.gz" | tar xz
+sudo mv "jmax-$V-$T/jmax" /usr/local/bin/ && jmax --version
 ```
+
+Targets: `aarch64-apple-darwin`, `x86_64-apple-darwin`, `x86_64-unknown-linux-musl`, `aarch64-unknown-linux-musl`, `x86_64-pc-windows-msvc`. Full instructions in the [install guide](https://openie-dev.github.io/jmax/install.html).
 
 Platform support:
 
@@ -103,7 +99,6 @@ The documentation site and the GitHub Pages book mirror each other:
 | Browser playground | [play.charlot-lang.dev](https://play.charlot-lang.dev) | — |
 
 - Examples → [`examples/`](./examples/)
-- Embedding API → [docs.rs/jmax](https://docs.rs/jmax)
 - Source mirror → [`openIE-dev/jmax-core`](https://github.com/openIE-dev/jmax-core)
 
 ## Releases
