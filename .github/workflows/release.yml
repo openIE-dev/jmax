@@ -99,15 +99,19 @@ jobs:
 
           cp LICENSE README.md "$STAGE/$BASE/" 2>/dev/null || true
 
+          # shasum (perl) exists on macOS/Linux runners but not Windows git-bash,
+          # which ships sha256sum instead. Pick whichever is present.
+          sha256() { if command -v shasum >/dev/null 2>&1; then shasum -a 256 "$1"; else sha256sum "$1"; fi; }
+
           cd "$STAGE"
           if [ "${{ matrix.archive }}" = "zip" ]; then
             (cd "$BASE" && 7z a -tzip "../${BASE}.zip" .)
             mv "${BASE}.zip" "${{ github.workspace }}/"
-            (cd "${{ github.workspace }}" && shasum -a 256 "${BASE}.zip" > "${BASE}.zip.sha256")
+            (cd "${{ github.workspace }}" && sha256 "${BASE}.zip" > "${BASE}.zip.sha256")
           else
             tar czf "${BASE}.tar.gz" "$BASE"
             mv "${BASE}.tar.gz" "${{ github.workspace }}/"
-            (cd "${{ github.workspace }}" && shasum -a 256 "${BASE}.tar.gz" > "${BASE}.tar.gz.sha256")
+            (cd "${{ github.workspace }}" && sha256 "${BASE}.tar.gz" > "${BASE}.tar.gz.sha256")
           fi
 
           ls -la "${{ github.workspace }}"/*${BASE}*
