@@ -1,12 +1,19 @@
 # Install
 
-JMax ships as a **self-contained prebuilt binary** — no toolchain, no compile step. Grab the archive for your platform from the [latest GitHub Release](https://github.com/openIE-dev/jmax/releases/latest). Assets are named `jmax-<version>-<target>.tar.gz` (`.zip` on Windows), each with a `.sha256` checksum.
+JMax ships as a **self-contained prebuilt binary**: no toolchain, no compile step. The quickest path on macOS and Linux is Homebrew; otherwise grab the archive for your platform from the [latest GitHub Release](https://github.com/openIE-dev/jmax/releases/latest). Assets are named `jmax-<version>-<target>.tar.gz` (`.zip` on Windows), each with a `.sha256` checksum.
+
+## Homebrew (macOS / Linux)
+
+```bash
+brew install openie-dev/jmax/jmax
+jmax --version
+```
 
 ## Download (macOS / Linux)
 
 ```bash
 # Pick your target (see the list below); this example is Apple silicon.
-V=0.1.0
+V=0.1.2
 T=aarch64-apple-darwin
 curl -fsSL "https://github.com/openIE-dev/jmax/releases/download/v$V/jmax-$V-$T.tar.gz" | tar xz
 sudo mv "jmax-$V-$T/jmax" /usr/local/bin/
