@@ -70,6 +70,13 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
+      - name: Install protoc
+        # The flowG substrate crates (flowg-emit-*) build .proto via prost-build,
+        # which needs the protobuf compiler on every runner.
+        uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build
         shell: bash
         working-directory: jmax-core
