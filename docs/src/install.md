@@ -27,6 +27,7 @@ jmax --version
 | macOS (Apple silicon) | `aarch64-apple-darwin` |
 | macOS (Intel) | `x86_64-apple-darwin` |
 | Linux x86-64 | `x86_64-unknown-linux-gnu` |
+| Linux arm64 | `aarch64-unknown-linux-gnu` |
 | Windows x86-64 | `x86_64-pc-windows-msvc` (`.zip`) |
 
 ## Windows
