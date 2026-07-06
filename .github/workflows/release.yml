@@ -84,7 +84,10 @@ jobs:
         shell: bash
         working-directory: jmax-core
         run: |
-          cargo build --release --target ${{ matrix.target }} -p jmax-cli
+          # --locked: build the exact versions in jmax-core's committed Cargo.lock
+          # (reproducible; without it a fresh resolve can pick a different patch of
+          # a substrate crate and regress a platform, e.g. an un-Windows-fixed dep).
+          cargo build --locked --release --target ${{ matrix.target }} -p jmax-cli
 
       - name: Package
         shell: bash
