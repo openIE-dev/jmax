@@ -58,10 +58,10 @@ jobs:
           fi
 
       - name: Checkout public release surface
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout standalone source (jmax-core)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: openIE-dev/jmax-core
           token: ${{ secrets.JMAX_CORE_READ_TOKEN }}
@@ -134,7 +134,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Download all artifacts
         uses: actions/download-artifact@v4
