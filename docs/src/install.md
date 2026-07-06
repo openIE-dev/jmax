@@ -20,13 +20,10 @@ jmax --version
 | macOS (Apple silicon) | `aarch64-apple-darwin` |
 | macOS (Intel) | `x86_64-apple-darwin` |
 | Linux x86-64 | `x86_64-unknown-linux-gnu` |
-| Windows x86-64 | `x86_64-pc-windows-msvc` (`.zip`) |
 
-## Windows
+Windows binaries are on the way; in the meantime run jmax in your browser (below) or under WSL with the Linux build.
 
-Download the `x86_64-pc-windows-msvc` `.zip` from the [Releases page](https://github.com/openIE-dev/jmax/releases/latest), unzip it, and put `jmax.exe` somewhere on your `PATH`.
-
-## No install — run it in your browser
+## No install: run it in your browser
 
 [play.charlot-lang.dev](https://play.charlot-lang.dev) runs the JMax evaluator compiled to WebAssembly. Nothing leaves the page.
 
