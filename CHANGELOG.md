@@ -4,9 +4,12 @@ All notable changes to this release surface are documented here. Format follows 
 
 ## [Unreleased]
 
-## [0.1.0] — 2026-07-05
+### Changed
+- License: MIT OR Apache-2.0 for the binaries, documentation and examples, replacing Business Source License 1.1.
 
-First public release of the JMax binary — a single self-contained tool spanning symbolic math, numerics, simulation, statistics, and visualization (83 subcommands), pure Rust, no BLAS/LAPACK/SciPy.
+## [0.1.0], 2026-07-05
+
+First public release of the JMax binary, a single self-contained tool spanning symbolic math, numerics, simulation, statistics, and visualization (83 subcommands), pure Rust, no BLAS/LAPACK/SciPy.
 
 ### Added
 - **Numerical linear algebra**: dense LU/QR/Cholesky/SVD; symmetric, general (`eigvals`), sparse Lanczos + shift-invert (`eigs`), and generalized (`geneig`) eigenproblems; general eigenvectors; rank-revealing pivoted QR (`rrqr`); sparse direct solvers (`lusolve`); matrix functions `expm`/`sqrtm`/`logm`; `nmf`, `lowrank`.

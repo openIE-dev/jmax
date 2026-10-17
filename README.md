@@ -5,18 +5,17 @@
 [![Release](https://github.com/openIE-dev/jmax/actions/workflows/release.yml/badge.svg)](https://github.com/openIE-dev/jmax/actions/workflows/release.yml)
 [![Quality](https://github.com/openIE-dev/jmax/actions/workflows/quality.yml/badge.svg)](https://github.com/openIE-dev/jmax/actions/workflows/quality.yml)
 [![Docs](https://github.com/openIE-dev/jmax/actions/workflows/docs.yml/badge.svg)](https://openie-dev.github.io/jmax)
-[![License](https://img.shields.io/badge/license-BSL--1.1-blue.svg)](./LICENSE)
 
 
-JMax is what you'd build if you started from "I want MATLAB / Julia / R / Mathematica, but as a single self-contained tool with no install dance and 2,500 functions built in." It's a complete data-science surface — linear algebra, signal processing, plotting, statistics, ML primitives — projected onto [flowG](https://github.com/openIE-dev/flow-g) so the same code runs on CPU, Apple-silicon Metal, or WebGPU.
+JMax is what you'd build if you started from "I want MATLAB / Julia / R / Mathematica, but as a single self-contained tool with no install dance and 2,500 functions built in." It's a complete data-science surface, linear algebra, signal processing, plotting, statistics, ML primitives, projected onto [flowG](https://github.com/openIE-dev/flow-g) so the same code runs on CPU, Apple-silicon Metal, or WebGPU.
 
 This is the **public release surface**. Source is private at [`openIE-dev/jmax-core`](https://github.com/openIE-dev/jmax-core).
 
-**Try it in your browser — no install:** [play.charlot-lang.dev](https://play.charlot-lang.dev) runs the JMax evaluator compiled to WebAssembly. Nothing leaves the page.
+**Try it in your browser, no install:** [play.charlot-lang.dev](https://play.charlot-lang.dev) runs the JMax evaluator compiled to WebAssembly. Nothing leaves the page.
 
 ## Status
 
-> Release binaries + examples + documentation. JMax is **free to use software**, not an open-source project. See [LICENSE](./LICENSE) for Business Source License 1.1 terms — converts to Apache-2.0 four years after each binary's release date.
+> Release binaries + examples + documentation. JMax is a free and open research project, released under MIT OR Apache-2.0 (see [COPYRIGHT](./COPYRIGHT)).
 
 ## What you get
 
@@ -26,7 +25,7 @@ This is the **public release surface**. Source is private at [`openIE-dev/jmax-c
 
 ## Install
 
-JMax ships as a **self-contained prebuilt binary** — download the archive for your platform from the [latest release](https://github.com/openIE-dev/jmax/releases/latest) (assets: `jmax-<version>-<target>.tar.gz`, with SHA-256 checksums):
+JMax ships as a **self-contained prebuilt binary**, download the archive for your platform from the [latest release](https://github.com/openIE-dev/jmax/releases/latest) (assets: `jmax-<version>-<target>.tar.gz`, with SHA-256 checksums):
 
 ```bash
 V=0.1.0; T=aarch64-apple-darwin   # Apple silicon; pick your target
@@ -72,20 +71,20 @@ See [`examples/`](./examples/) for linear algebra, signal processing, plotting, 
 
 ## What makes JMax different
 
-- **2,500+ functions across 82 modules**, all in one binary — linear algebra, FFT, optimization, statistics, ML primitives, file IO, plotting — nothing else to install. The [reference](https://openie-dev.github.io/jmax/reference/builtins.html) documents the 113 most-used as top-level built-ins.
-- **`.jm` files run anywhere** — same code on CPU, GPU, WGPU via flowG dispatch.
-- **Energy receipts** — every workload optionally records picojoule-per-operation via the substrate-energy layer.
-- **MCP server built in** — JMax exposes its computation surface as an MCP server (`jmax mcp`) so any LLM agent can route math through it.
-- **Pure Rust** — no Python, no C++ shared libraries, no LAPACK or BLAS to install. JMax compiles to a single binary.
+- **2,500+ functions across 82 modules**, all in one binary, linear algebra, FFT, optimization, statistics, ML primitives, file IO, plotting, nothing else to install. The [reference](https://openie-dev.github.io/jmax/reference/builtins.html) documents the 113 most-used as top-level built-ins.
+- **`.jm` files run anywhere**, same code on CPU, GPU, WGPU via flowG dispatch.
+- **Energy receipts**, every workload optionally records picojoule-per-operation via the substrate-energy layer.
+- **MCP server built in**, JMax exposes its computation surface as an MCP server (`jmax mcp`) so any LLM agent can route math through it.
+- **Pure Rust**, no Python, no C++ shared libraries, no LAPACK or BLAS to install. JMax compiles to a single binary.
 
 ## How it fits
 
 JMax is the **scientific-computing surface** in the openIE-dev family:
 
-- [flowG](https://github.com/openIE-dev/flow-g) — the substrate JMax compiles to
-- [Lux](https://github.com/openIE-dev/lux-lang) — general-purpose sibling
-- [Joule](https://github.com/openIE-dev/joule-lang) — energy-budgeted compiled sibling
-- [JouleDB](https://github.com/openIE-dev/jouledb) — the metered database for persistence
+- [flowG](https://github.com/openIE-dev/flow-g), the substrate JMax compiles to
+- [Lux](https://github.com/openIE-dev/lux-lang), general-purpose sibling
+- [Joule](https://github.com/openIE-dev/joule-lang), energy-budgeted compiled sibling
+- [JouleDB](https://github.com/openIE-dev/jouledb), the metered database for persistence
 
 ## Documentation
 
@@ -96,23 +95,22 @@ The documentation site and the GitHub Pages book mirror each other:
 | Home / language | [charlot-lang.dev](https://charlot-lang.dev) | [openie-dev.github.io/jmax](https://openie-dev.github.io/jmax) |
 | Docs & function reference | [docs.charlot-lang.dev](https://docs.charlot-lang.dev) | [/reference/builtins](https://openie-dev.github.io/jmax/reference/builtins.html) |
 | `jmax` CLI reference | [api.charlot-lang.dev](https://api.charlot-lang.dev) | [/reference/cli](https://openie-dev.github.io/jmax/reference/cli.html) |
-| Browser playground | [play.charlot-lang.dev](https://play.charlot-lang.dev) | — |
+| Browser playground | [play.charlot-lang.dev](https://play.charlot-lang.dev) |, |
 
 - Examples → [`examples/`](./examples/)
 - Source mirror → [`openIE-dev/jmax-core`](https://github.com/openIE-dev/jmax-core)
 
 ## Releases
 
-[GitHub Releases](https://github.com/openIE-dev/jmax/releases) — tagged versions with prebuilt binaries for every supported platform, plus SHA-256 checksums.
+[GitHub Releases](https://github.com/openIE-dev/jmax/releases), tagged versions with prebuilt binaries for every supported platform, plus SHA-256 checksums.
 
 ## Community
 
-- [Discussions](https://github.com/openIE-dev/jmax/discussions) — Q&A, function requests
-- [Issues](https://github.com/openIE-dev/jmax/issues) — bug reports
+- [Discussions](https://github.com/openIE-dev/jmax/discussions), Q&A, function requests
+- [Issues](https://github.com/openIE-dev/jmax/issues), bug reports
 - Security: see [SECURITY.md](./SECURITY.md)
 
 ## License
 
-- **Binaries** — Business Source License 1.1; see [LICENSE](./LICENSE). Free for non-commercial use, internal use by orgs under $1M revenue, security/academic research. Converts to Apache-2.0 four years after each release.
-- **Documentation** — CC-BY-4.0
-- **Examples** — Apache-2.0
+Copyright (c) 2026 Open Interface Engineering, Inc. Licensed under either of Apache License, Version 2.0 ([LICENSE-APACHE](./LICENSE-APACHE)) or the MIT license ([LICENSE-MIT](./LICENSE-MIT)), at your option, for the binaries, the documentation and the examples. Earlier releases and earlier versions of this README described the binaries as Business Source License 1.1; that no longer applies.
+

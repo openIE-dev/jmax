@@ -103,7 +103,7 @@ jobs:
             cp "jmax-core/target/${{ matrix.target }}/release/${BIN_NAME}" "$STAGE/$BASE/"
           fi
 
-          cp LICENSE README.md "$STAGE/$BASE/" 2>/dev/null || true
+          cp LICENSE-MIT LICENSE-APACHE COPYRIGHT README.md "$STAGE/$BASE/" 2>/dev/null || true
 
           # shasum (perl) exists on macOS/Linux runners but not Windows git-bash,
           # which ships sha256sum instead. Pick whichever is present.
