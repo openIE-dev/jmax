@@ -1,6 +1,6 @@
 [package]
 name = "jmax"
-version = "0.1.0"
+version = "0.1.5"
 edition = "2021"
 rust-version = "1.74"
 description = "Math-native programming language replacing MATLAB / Julia / R / Mathematica. Stub installer; `cargo binstall jmax` fetches the real binary."
@@ -20,7 +20,7 @@ name = "jmax"
 path = "src/main.rs"
 
 [package.metadata.binstall]
-pkg-url = "{ repo }/releases/download/v{ version }/jmax-{ version }-{ target }.{ archive-suffix }"
+pkg-url = "{ repo }/releases/download/v{ version }/jmax-{ version }-{ target }{ archive-suffix }"
 pkg-fmt = "tgz"
 bin-dir = "jmax-{ version }-{ target }/{ bin }{ binary-ext }"
 
